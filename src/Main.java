@@ -1,32 +1,23 @@
 import java.lang.System;
 import java.util.Scanner;
 
-public class Main {
+public class Main{
     public static void main(String[] args){
         Scanner scan = new Scanner(System.in);
-        String name = null;
-        String job = null;
-        String hobby = null;
-        String color = null;
+        int year = 0;
+        int month = 0;
+        int day = 0;
 
-        System.out.print("안녕? 넌 이름이 뭐야?: ");
-        name = scan.nextLine();
-        System.out.println("만나서 반가워," + name + ".");
+        System.out.print("당신이 태어난 년도를 입력하세요.: ");
+        year = scan.nextInt();
 
-        System.out.print("넌 주로 뭐하고 살아?: ");
-        job = scan.nextLine();
-        System.out.println(job + "? 나도 마찬가지야 ㅎㅎ");
+        System.out.print("당신이 태어난 달을 입력하세요.: ");
+        month = scan.nextInt();
 
-        System.out.print("그럼 심심할 때 뭐하니?: ");
-        hobby = scan.nextLine();
-        System.out.println(hobby + "? 나랑 똑같네.");
+        System.out.print("당신이 태어난 날을 입력하세요.: ");
+        day = scan.nextInt();
 
-        System.out.print("혹시 좋아하는 색은 뭐야?: ");
-        color = scan.nextLine();
-        System.out.println(color + "이라구? 와~ 이것도 나랑 똑같네. 신기하다.");
-
-        System.out.println("앞으로 우리 친하게 지내자.");
-
+        System.out.println("\n당신은 " + year + "년 " + month + "월 " + day + "일에 태어났군요. 당신은 사랑받기 위해 태어난사람");
         return;
     }
 }
