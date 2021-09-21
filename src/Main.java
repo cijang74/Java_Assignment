@@ -1,30 +1,28 @@
 import java.lang.System;
 import java.util.Scanner;
+import java.lang.Math;
 
 public class Main {
+
     public static void main(String[] args) {
+
         Scanner scan = new Scanner(System.in);
-        int year = 0;
+        int headsOrTails = 0, user = 0;
 
-        System.out.print("년도를 입력하세요: ");
-        year = scan.nextInt();
+        System.out.println("동전 던지기 게임을 시작합니다.\n");
+        System.out.print("앞면(0), 뒷면(1) 중 하나를 선택하세요: ");
+        user = scan.nextInt();
 
-        if ((year % 400) == 0)
-        {
-            System.out.println(year + "년은 윤년입니다.");
-        }
+        String choice = (user == 0) ? "동전 앞면을 선택했습니다." : "동전 뒷면을 선택했습니다.";
+        System.out.println(choice);
 
-        else if ((year % 100) == 0)
-        {
-            System.out.println(year + "년은 평년입니다.");
-        }
+        headsOrTails = (int)(Math.random() * 2 );
 
-        else if ((year % 4) == 0)
-        {
-            System.out.println(year + "년은 윤년입니다.");
-        }
+        String result = (headsOrTails == 0) ? "결과는 동전 앞면입니다." : "결과는 동전 뒷면입니다.";
+        System.out.println(result);
 
-        else System.out.println(year + "년은 평년입니다.");
+        String answer = (headsOrTails == user) ? "맞췄습니다.\n" : "틀렸습니다.\n";
+                System.out.println(answer);
 
         return;
     }
