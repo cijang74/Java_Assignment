@@ -4,29 +4,29 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-        String weatherReport = null;
-        String newsMessage = null;
+        int payment = 0, change = 0, coin500 = 0, coin100 = 0, coin50 = 0, coin10 = 0;
 
-        System.out.print("오늘의 기상 특보를 입력하세요: ");
-        weatherReport = scan.next();
+        System.out.print("돈을 입력하세요: ");
+        payment = scan.nextInt();
+        change = payment;
 
-        System.out.println("일부 지방에 " + weatherReport + "가 발효중입니다.");
-        newsMessage = "출근길 " ;
+        coin500 = change / 500;
+        change = change % 500;
 
-        if (weatherReport.equals ("대설특보")){
-            newsMessage += "눈길";
-        }
+        coin100 = change / 100;
+        change = change % 100;
 
-        else if (weatherReport.equals ("호우특보")){
-            newsMessage += "빗길";
-        }
+        coin50 = change / 50;
+        change = change % 50;
 
-        else if (weatherReport.equals ("강풍주의보")){
-            newsMessage += "안전";
-        }
+        coin10 = change / 10;
+        change = change % 10;
 
-        newsMessage += " 운전에 유의해야 합니다.";
-        System.out.println(newsMessage);
+        System.out.println(payment + "원을" );
+        System.out.println("500원짜리 동전" + coin500 + "개, ");
+        System.out.println("100원짜리 동전" + coin100 + "개, " );
+        System.out.println("50원짜리 동전" + coin50 + "개, ");
+        System.out.println("10원짜리 동전" + coin10 + "개로 거슬러 드립니다." );
 
         return;
     }
