@@ -4,35 +4,48 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-        String player1 = null;
-        String player2 = null;
+        int month = 0;
 
-        System.out.print("A양, 가위, 바위, 보 중 하나를 선택하세요: ");
-        player1 = scan.nextLine().trim();
-        System.out.println(player1 + "를 냈습니다.");
+        System.out.print("1월 ~ 12월 사이의 월을 입력하세요.: ");
+        month = scan.nextInt();
 
-        System.out.print("B군, 가위, 바위, 보 중 하나를 선택하세요: ");
-        player2 = scan.nextLine().trim();
-        System.out.println(player2 + "를 냈습니다.");
-
-        if (player1.equals(player2))
-        {
-            System.out.println("\n비겼습니다.");
-        }
-
-        else if (player1.equals("가위") && player2.equals("보"))
-        {
-            System.out.println("A양이 이겼습니다.");
-        }
-
-        else if (player1.equals("바위") && player2.equals("가위"))
-        {
-            System.out.println("A양이 이겼습니다.");
-        }
-
-        else if (player1.equals("보") && player2.equals("바위"))
-        {
-            System.out.println("A양이 이겼습니다.");
+        switch (month){
+            case 1:
+                System.out.println("1월의 영어 이름은 January 입니다.");
+                break;
+            case 2:
+                System.out.println("2월의 영어 이름은 February 입니다.");
+                break;
+            case 3:
+                System.out.println("3월의 영어 이름은 March 입니다.");
+                break;
+            case 4:
+                System.out.println("4월의 영어 이름은 April 입니다.");
+                break;
+            case 5:
+                System.out.println("5월의 영어 이름은 May 입니다.");
+                break;
+            case 6:
+                System.out.println("6월의 영어 이름은 June 입니다.");
+                break;
+            case 7:
+                System.out.println("7월의 영어 이름은 July 입니다.");
+                break;
+            case 8:
+                System.out.println("8월의 영어 이름은 August 입니다.");
+                break;
+            case 9:
+                System.out.println("9월의 영어 이름은 September 입니다.");
+                break;
+            case 10:
+                System.out.println("10월의 영어 이름은 October 입니다.");
+                break;
+            case 11:
+                System.out.println("11월의 영어 이름은 November 입니다.");
+                break;
+            default:
+                System.out.println("12월의 영어 이름은 December 입니다.");
+                break;
         }
 
         return;
