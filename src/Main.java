@@ -4,19 +4,21 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-        int totalSeconds = 0, change = 0, hours = 0, minutes = 0, seconds = 0;
+        int score = 0;
 
-        System.out.print("초를 입력하세요: ");
-        totalSeconds = scan.nextInt();
-        change = totalSeconds;
+        System.out.println("0점 ~ 100점 사이의 점수를 입력하세요: ");
+        score = scan.nextInt();
 
-        hours = change / (60 * 60);
-        change = change % (60 * 60);
-
-        minutes = change / 60;
-        seconds = change % 60;
-
-        System.out.println(totalSeconds + "초는 " + hours + "시간 " + minutes + "분 " + seconds +"초입니다.");
+        switch (score / 10){
+            case 10: case 9:
+                System.out.println("와! ");
+            case 8:
+                System.out.println("끝내주게 !");
+            case 7:
+                System.out.println("잘 ");
+            default:
+                System.out.println("했다");
+        }
 
         return;
     }
