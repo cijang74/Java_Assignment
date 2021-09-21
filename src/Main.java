@@ -1,23 +1,21 @@
 import java.lang.System;
 import java.util.Scanner;
 
-public class Main{
-    public static void main(String[] args){
-        Scanner scan = new Scanner(System.in);
-        int year = 0;
-        int month = 0;
-        int day = 0;
+public class Main {
+    public static void main(String[] args) {
+        int a = 3, b = 3, c = 0, d = 0;
+        c = ++a;
+        d = b++;
 
-        System.out.print("당신이 태어난 년도를 입력하세요.: ");
-        year = scan.nextInt();
+        System.out.println("a = 3일 때 c = ++a 적용 후 결과 a = " + a + ",c = " + c);
+        System.out.println("b = 3일 때 d = b++ 적용 후 결과 d = " + b + ",c = " + d);
 
-        System.out.print("당신이 태어난 달을 입력하세요.: ");
-        month = scan.nextInt();
+        c = --a;
+        d = b--;
 
-        System.out.print("당신이 태어난 날을 입력하세요.: ");
-        day = scan.nextInt();
+        System.out.println("a = 4일 때 c = --a 적용 후 결과 a = " + a + ",c = " + c);
+        System.out.println("b = 4일 때 d = b-- 적용 후 결과 d = " + b + ",c = " + d);
 
-        System.out.println("\n당신은 " + year + "년 " + month + "월 " + day + "일에 태어났군요. 당신은 사랑받기 위해 태어난사람");
         return;
     }
 }
