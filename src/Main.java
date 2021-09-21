@@ -4,29 +4,19 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-        int payment = 0, change = 0, coin500 = 0, coin100 = 0, coin50 = 0, coin10 = 0;
+        int totalSeconds = 0, change = 0, hours = 0, minutes = 0, seconds = 0;
 
-        System.out.print("돈을 입력하세요: ");
-        payment = scan.nextInt();
-        change = payment;
+        System.out.print("초를 입력하세요: ");
+        totalSeconds = scan.nextInt();
+        change = totalSeconds;
 
-        coin500 = change / 500;
-        change = change % 500;
+        hours = change / (60 * 60);
+        change = change % (60 * 60);
 
-        coin100 = change / 100;
-        change = change % 100;
+        minutes = change / 60;
+        seconds = change % 60;
 
-        coin50 = change / 50;
-        change = change % 50;
-
-        coin10 = change / 10;
-        change = change % 10;
-
-        System.out.println(payment + "원을" );
-        System.out.println("500원짜리 동전" + coin500 + "개, ");
-        System.out.println("100원짜리 동전" + coin100 + "개, " );
-        System.out.println("50원짜리 동전" + coin50 + "개, ");
-        System.out.println("10원짜리 동전" + coin10 + "개로 거슬러 드립니다." );
+        System.out.println(totalSeconds + "초는 " + hours + "시간 " + minutes + "분 " + seconds +"초입니다.");
 
         return;
     }
