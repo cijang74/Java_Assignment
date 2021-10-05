@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-class RockPaperScissors
+class RockPaperScissors_Lose
 {
     public final int ROCK = 0;
     public final int PAPER = 1;
@@ -9,7 +9,7 @@ class RockPaperScissors
     private String playerA;
     private String playerB;
 
-    public RockPaperScissors()
+    public RockPaperScissors_Lose()
     {
         this.playerA = "가위";
         this.playerB = "바위";
@@ -92,11 +92,11 @@ class RockPaperScissors
                 (playerA.equals("바위") && playerB.equals("가위")) ||
                 (playerA.equals("보") && playerB.equals("바위")))
         {
-            result = "플레이어 A가 이겼습니다";
+            result = "플레이어 B가 이겼습니다";
         }
         else
         {
-            result = "플레이어 B가 이겼습니다.";
+            result = "플레이어 A가 이겼습니다.";
         }
         return result;
     }
@@ -107,7 +107,7 @@ public class Main
     public static void main (String[] args)
     {
         Scanner scan = new Scanner(System.in);
-        RockPaperScissors game = new RockPaperScissors();
+        RockPaperScissors_Lose game = new RockPaperScissors_Lose();
         String result = game.play(scan);
         System.out.println(result);
 
