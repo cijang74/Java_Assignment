@@ -1,116 +1,91 @@
 import java.util.Scanner;
 
-class RockPaperScissors_Lose
+class TV
 {
-    public final int ROCK = 0;
-    public final int PAPER = 1;
-    public final int SCISSORS = 2;
+    public final boolean ON = true;
+    public final boolean OFF = false;
 
-    private String playerA;
-    private String playerB;
+    private boolean power;
+    private int channel;
+    private int volume;
 
-    public RockPaperScissors_Lose()
+    public TV()
     {
-        this.playerA = "가위";
-        this.playerB = "바위";
-    }// 생성자는 return을 적지 않는다
-
-    public String play(Scanner scan) // 오버로딩
-    {
-        this.playerA = getRockPaperScissors(scan);
-        this.playerB = getRockPaperScissors();
-        String result = getResult(this.playerA, this.playerB);
-
-        return result;
+        this.power = OFF;
+        this.channel = 100;
+        this.volume = 10;
     }
 
-    public String play(String playerA) // 오버로딩
+    public String clickPower()
     {
-        this.playerA = playerA;
-        this.playerB = getRockPaperScissors();
-        String result = getResult(this.playerA, this.playerB);
-        return result;
-    }
-
-    private String getResult(String playerA, String playerB)
-    {
-        String result = "";
-        result += "플레이어 A는" + playerA + "를 냈습니다.\n";
-        result += "플레이어 B는" + playerB + "를 냈습니다.\n";
-
-        result += "판정결과는" + judge(playerA, playerB) + "\n";
-        return result;
-    }
-
-    private String getResult()
-    {
-        return getResult(this.playerA, this.playerB);
-    }
-
-    private String getRockPaperScissors(Scanner scan)
-    {
-        String result = "";
-
-        do
+        if(this.power == OFF)
         {
-            System.out.print("가위, 바위, 보 중 하나를 입력하세요: ");
-            result = scan.next();
-        } while (!result.equals("가위") && !result.equals("바위") && !result.equals("보"));
-        return result;
-    }
-
-    private  String getRockPaperScissors()
-    {
-        int num = (int)(Math.random()*3);
-        String result = "";
-
-        if (num == SCISSORS)
-        {
-            result = "가위";
-        }
-
-        else if (num == ROCK)
-        {
-            result = "바위";
-        }
-
-        else
-        {
-            result = "보";
-        }
-        return result;
-    }
-
-    private String judge(String playerA, String playerB)
-    {
-        String result = "";
-        if (playerA.equals((playerB)))
-        {
-            result = "플레이어 A와 플레이어 B가 비겼습니다.";
-        }
-        else if ((playerA.equals("가위") && playerB.equals("보")) ||
-                (playerA.equals("바위") && playerB.equals("가위")) ||
-                (playerA.equals("보") && playerB.equals("바위")))
-        {
-            result = "플레이어 B가 이겼습니다";
+            this.power = ON;
+            return "전원을 켭니다";
         }
         else
         {
-            result = "플레이어 A가 이겼습니다.";
+            this.power = OFF;
+            return "전원을 끕니다";
         }
-        return result;
+    }
+
+    public String clickUp()
+    {
+        return "현재 채널은" + (++this.channel) + "번입니다.";
+    }
+
+    public String clickDown()
+    {
+        return "현재 채널은" + (--this.channel) + "번입니다.";
+    }
+
+    public String clickLeft()
+    {
+        return "현재 음량은" + (--this.volume) + "입니다.";
+    }
+
+    public String clickRight()
+    {
+        return "현재 음량은" + (++this.volume) + "입니다.";
     }
 }
 
 public class Main
 {
-    public static void main (String[] args)
+    public static void main(String[] args)
     {
         Scanner scan = new Scanner(System.in);
-        RockPaperScissors_Lose game = new RockPaperScissors_Lose();
-        String result = game.play(scan);
-        System.out.println(result);
+        String result = "";
 
+        TV tv = new TV();
+
+        do
+        {
+            System.out.print("TV 리모콘의 상하좌우, 전원, 종료 중 하나를 입력하세요: ");
+            result = scan.next();
+
+            if(result.equals("전원"))
+            {
+                System.out.println(tv.clickPower());
+            }
+            else if (result.equals("상"))
+            {
+                System.out.println(tv.clickUp());
+            }
+            else if (result.equals("하"))
+            {
+                System.out.println(tv.clickDown());
+            }
+            else if (result.equals("좌"))
+            {
+                System.out.println(tv.clickLeft());
+            }
+            else if (result.equals("우"))
+            {
+                System.out.println(tv.clickRight());
+            }
+        } while(!result.equals("종료"));
         return;
     }
 }
