@@ -3,35 +3,51 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-class PushCounterPanel extends JPanel
+class StyleOptionsPanel extends JPanel // 패키지 안에 있는 JPanel 클래스 상속
 {
-    private int count;
-    private JButton push;
-    private JLabel label;
+    private JLabel saying; // 라벨형 saying 변수 선언
+    private JCheckBox bold, italic; // 체크박스형 bold, italic 변수 선언
 
-    public PushCounterPanel()
+    public StyleOptionsPanel()
     {
-        count = 0;
+        saying = new JLabel("교수님 사랑해요"); // "교수님 사랑해요"라는 텍스트를 가진 라벨 객체 생성, saying 변수에 저장
+        saying.setFont(new Font("Helvetica", Font.PLAIN, 36)); // saying 변수의 폰트 설정
 
-        push = new JButton("Push Me!"); // Push Me!라는 버튼 객체를 생성하고 push 변수에 넣음
-        push.addActionListener(new ButtonListener());
+        bold = new JCheckBox("Bold"); // "Bold" 체크 박스 생성 후 bold 변수에 저장
+        bold.setBackground(Color.lightGray); // 체크박스 색상 설정
 
-        label = new JLabel("Pushes: " + count); // 문자열 "Pushes: "과 변수 count를 출력시켜출 라벨 객체 생성 후 label 변수에 넣음
+        italic = new JCheckBox("Italic"); // "Italic" 체크 박스 생성 후 italic 변수에 저장
+        italic.setBackground(Color.lightGray); // 체크박스 색상 설정
 
-        add(push); // 컴포넌트에 주가
-        add(label); // 컴포넌트에 추가
+        StyleListener listener = new StyleListener(); // StyleListener 객체 생성 후 listener 변수에 저장
+        bold.addItemListener(listener); // bold 체크박스에 listener 효과 추가
+        italic.addItemListener(listener); // ""
 
-        setBackground(Color.gray);
-        setPreferredSize(new Dimension(300, 40)); // 픽셀로 계산하여 가로 300, 세로 40
+        // 컴포넌트에 추가
+        add(saying);
+        add(bold);
+        add(italic);
+
+        setBackground(Color.white); // 배경 색상 설정
+        setPreferredSize(new Dimension(300, 100));
     }
-
-    private class ButtonListener implements ActionListener // 버튼을 클릭한 이벤트가 발생했는지 살피는 리스너
+    private class StyleListener implements ItemListener // 체크박스를 변경했을 때 실행되는 메서드
     {
-        public void actionPerformed(ActionEvent event) // 이벤트 발생하면
+        public void itemStateChanged(ItemEvent event) // 부모가 인터페이스라 무조건 오버라이딩 해줘야함~
         {
-            count++;
-            label.setText("Pushes: " + count);
+            int style = Font.PLAIN; // style 변수는 기본 형태의 폰트로 선언됨
 
+            if (bold.isSelected()) // bold 체크박스가 체크되었다면
+            {
+                style = Font.BOLD;
+            }
+
+            if (italic.isSelected())
+            {
+                style += Font.ITALIC;
+            }
+
+            saying.setFont(new Font("Helvetica", style, 36)); // 앞에서 설정한 style을 가지고 라벨 생성
             return;
         }
     }
