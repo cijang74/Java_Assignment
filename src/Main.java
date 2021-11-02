@@ -1,38 +1,20 @@
-class Slogan
-{
-    private String phrase;
-    private static int count = 0;
+import javax.swing.JFrame;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
 
-    public Slogan (String str)
-    {
-        phrase = str;
-        count++;
-    }
-    public String toString()
-    {
-        return phrase;
-    }
-    public static int getCount()
-    {
-        return count;
-    }
-}
 public class Main
 {
-    public static void main (String[] args)
+    public static void main(String[] args)
     {
-        Slogan obj;
-        obj = new Slogan("Remember the Almo.");
-        System.out.println(obj);
+        JFrame frame = new JFrame("Push Counter");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        obj = new Slogan("Don't Worry. Be Happy.");
-        System.out.println(obj);
+        PushCounterPanel panel = new PushCounterPanel(); // Panel 객체를 생성
+        frame.getContentPane().add(panel); //panel 객체에 있는 컴포넌트들을 불러와(getContentPane()) 프레임에 add함.
 
-        obj = new Slogan("Live Free or Die.");
-        System.out.println(obj);
-
-        System.out.println();
-        System.out.println("Slogans created:" + Slogan.getCount());
+        frame.pack();
+        frame.setVisible(true);
 
         return;
     }
