@@ -3,52 +3,61 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-class StyleOptionsPanel extends JPanel // 패키지 안에 있는 JPanel 클래스 상속
+class ReboundPanel extends JPanel // 패키지 안에 있는 JPanel 클래스 상속
 {
-    private JLabel saying; // 라벨형 saying 변수 선언
-    private JCheckBox bold, italic; // 체크박스형 bold, italic 변수 선언
+    // 변수, 상수 선언
+    private final int WIDTH = 300, HEIGHT = 100;
+    private final int DELAY = 20, IMAGE_SIZE = 35;
+    private ImageIcon image;
+    private Timer timer;
+    private int x, y, moveX, moveY;
 
-    public StyleOptionsPanel()
+    public ReboundPanel() // 생성자
     {
-        saying = new JLabel("교수님 사랑해요"); // "교수님 사랑해요"라는 텍스트를 가진 라벨 객체 생성, saying 변수에 저장
-        saying.setFont(new Font("Helvetica", Font.PLAIN, 36)); // saying 변수의 폰트 설정
+        timer = new Timer(DELAY, new ReboundListener()); // Timer 객체는 DELAY(20) 밀리세컨 1000분의 1초 마다 같은 동작을 반복한다.
+        image = new ImageIcon("happyFace.gif"); // 이미지 설정
 
-        bold = new JCheckBox("Bold"); // "Bold" 체크 박스 생성 후 bold 변수에 저장
-        bold.setBackground(Color.lightGray); // 체크박스 색상 설정
+        // default 위치
+        x = 0;
+        y = 40;
 
-        italic = new JCheckBox("Italic"); // "Italic" 체크 박스 생성 후 italic 변수에 저장
-        italic.setBackground(Color.lightGray); // 체크박스 색상 설정
+        // 이동속도
+        moveX = moveY = 3;
 
-        StyleListener listener = new StyleListener(); // StyleListener 객체 생성 후 listener 변수에 저장
-        bold.addItemListener(listener); // bold 체크박스에 listener 효과 추가
-        italic.addItemListener(listener); // ""
+        // WIDTH, HEIGHT 만큼의 디스플레이 크기 설정
+        setPreferredSize(new Dimension(WIDTH, HEIGHT));
+        setBackground(Color.black);
 
-        // 컴포넌트에 추가
-        add(saying);
-        add(bold);
-        add(italic);
-
-        setBackground(Color.white); // 배경 색상 설정
-        setPreferredSize(new Dimension(300, 100));
+        // 타이머 시작
+        timer.start();
     }
-    private class StyleListener implements ItemListener // 체크박스를 변경했을 때 실행되는 메서드
+
+    public void paintComponent(Graphics page)
+    // 자기 자신을 그리는 메서드
     {
-        public void itemStateChanged(ItemEvent event) // 부모가 인터페이스라 무조건 오버라이딩 해줘야함~
+        super.paintComponent(page);
+        image.paintIcon(this, page, x, y); // this 컴포넌트의 x,y 좌표에 자기 자신을 그림
+    }
+    private class ReboundListener implements ActionListener
+        // 타이머가 돌아갈 때 마다 계속해서 실행될 메서드
+    {
+        public void actionPerformed(ActionEvent event)
         {
-            int style = Font.PLAIN; // style 변수는 기본 형태의 폰트로 선언됨
+            // 이동 속도만큼 계속해서 이동
+            x += moveX;
+            y += moveY;
 
-            if (bold.isSelected()) // bold 체크박스가 체크되었다면
+            if (x <= 0 || x >= WIDTH - IMAGE_SIZE) // 테두리에 닿으면
             {
-                style = Font.BOLD;
+                moveX = moveX * -1; // 이동속도에 -1을 곱해주어 반대쪽으로 이동하도록 함
             }
 
-            if (italic.isSelected())
+            if ( y<= 0 || y >= HEIGHT - IMAGE_SIZE) // ""
             {
-                style += Font.ITALIC;
+                moveY = moveY * -1; // ""
             }
 
-            saying.setFont(new Font("Helvetica", style, 36)); // 앞에서 설정한 style을 가지고 라벨 생성
-            return;
+            repaint(); // 이미지가 계속 움직이는것을 실시간으로 blit해주기 위해 paintComponent 강제 실행
         }
     }
 }
