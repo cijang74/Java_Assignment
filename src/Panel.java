@@ -3,61 +3,45 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-class ReboundPanel extends JPanel // 패키지 안에 있는 JPanel 클래스 상속
+class CoordinatesPanel extends JPanel // 패키지 안에 있는 JPanel 클래스 상속
 {
     // 변수, 상수 선언
-    private final int WIDTH = 300, HEIGHT = 100;
-    private final int DELAY = 20, IMAGE_SIZE = 35;
-    private ImageIcon image;
-    private Timer timer;
-    private int x, y, moveX, moveY;
+    private final int Size = 6;
+    private int x = 50, y = 50;
 
-    public ReboundPanel() // 생성자
+    public CoordinatesPanel()
     {
-        timer = new Timer(DELAY, new ReboundListener()); // Timer 객체는 DELAY(20) 밀리세컨 1000분의 1초 마다 같은 동작을 반복한다.
-        image = new ImageIcon("happyFace.gif"); // 이미지 설정
-
-        // default 위치
-        x = 0;
-        y = 40;
-
-        // 이동속도
-        moveX = moveY = 3;
-
-        // WIDTH, HEIGHT 만큼의 디스플레이 크기 설정
-        setPreferredSize(new Dimension(WIDTH, HEIGHT));
-        setBackground(Color.black);
-
-        // 타이머 시작
-        timer.start();
+        addMouseListener(new CoordinatesListener()); // CoordinatesListener()에서 설정한 리스너를 마우스 리스너로 추가
+        setBackground(Color.black); // 바디 배경을 검은색으로 설정
+        setPreferredSize(new Dimension(300, 200)); // 프레임 크기 설정
     }
 
     public void paintComponent(Graphics page)
     // 자기 자신을 그리는 메서드
     {
         super.paintComponent(page);
-        image.paintIcon(this, page, x, y); // this 컴포넌트의 x,y 좌표에 자기 자신을 그림
+        page.setColor(Color.green);
+        page.fillOval(x,y,Size,Size); // 페이지의 50,50 좌표에 6x6만큼의 사각형 그리기
+        // 페이지에 문자열 그리기 (인수는 순서대로 그릴 문자열, x좌표, y좌표)
+        page.drawString("Coordinates: (" + x + y + ")", 5, 15);
     }
-    private class ReboundListener implements ActionListener
-        // 타이머가 돌아갈 때 마다 계속해서 실행될 메서드
+
+    private class CoordinatesListener implements MouseListener
+    // 마우스와 관련된 이벤트들을 입력받는 메서드
     {
-        public void actionPerformed(ActionEvent event)
+        public void mousePressed (MouseEvent event) //마우스를 눌렀을 때
         {
-            // 이동 속도만큼 계속해서 이동
-            x += moveX;
-            y += moveY;
+            // x, y값을 현재 마우스 위치값으로 저장
+            x = event.getX();
+            y = event.getY();
 
-            if (x <= 0 || x >= WIDTH - IMAGE_SIZE) // 테두리에 닿으면
-            {
-                moveX = moveX * -1; // 이동속도에 -1을 곱해주어 반대쪽으로 이동하도록 함
-            }
-
-            if ( y<= 0 || y >= HEIGHT - IMAGE_SIZE) // ""
-            {
-                moveY = moveY * -1; // ""
-            }
-
-            repaint(); // 이미지가 계속 움직이는것을 실시간으로 blit해주기 위해 paintComponent 강제 실행
+            repaint(); // 자기 자신을 그리는 메서드 강제 호출
         }
+
+        // 아래 이벤트 메서드는 해당 함수에서 사용되지 않으므로 따로 설정 x
+        public void mouseClicked (MouseEvent event) {}
+        public void mouseReleased (MouseEvent event) {}
+        public void mouseEntered (MouseEvent event) {}
+        public void mouseExited (MouseEvent event) {}
     }
 }
